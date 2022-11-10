@@ -16,7 +16,9 @@ exit
 fi
 
 # copy the test to the same folder as student's submissions
-cp TestListExamples.java ../
+cd ../
+cp TestListExamples.java student-submission/
+cd student-submission/
 
 # compile student code
 set +e
