@@ -1,13 +1,11 @@
 # Create your grading script here
-
 set -e
 CPATH=".:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar"
 rm -rf student-submission
 git clone $1 student-submission
-
 # check if the correct file submitted
 cd student-submission/
-if[[ -e ListExamples.java]]
+if[ -e ListExamples.java ]
 then 
 echo "correct file submitted"
 else 
@@ -24,7 +22,7 @@ cd student-submission/
 set +e
 javac -cp $CPATH *.java
 # notification if compile failed
-if[[$? -ne 0]]
+if[$? -ne 0]
 then
 echo "compile failed"
 set -e
