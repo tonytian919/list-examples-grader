@@ -1,64 +1,51 @@
 import static org.junit.Assert.*;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.*;
+import java.util.ArrayList;
 
+class AChecker implements StringChecker{
+  public boolean checkString(String s){
+    for(int i = 0; i < s.length() - 1; i++){
+      if(s.substring(i, i+1).equals("a") || s.substring(i, i+1).equals("A")){
+        return true;
+      }
+    }
+  }
+  return false;
+}
 public class TestListExamples {
   // Write your grading tests here!
-    @Test
-    public void testFilter() {
- 
-      //Implementing StringChecker to pass through
-      StringChecker sc = new StringChecker() {
-        public boolean checkString(String s){
-          if(s.contains("b")) {
-            return true;
-          }
-            return false;
-        }
-    };
-
-      List<String>inputList = new ArrayList<>();
-      inputList.add("banana");
-      inputList.add("bandana");
-      inputList.add("bandaid");
-      inputList.add("crash");
-
-      List<String>checkExpected = new ArrayList<>();
-      checkExpected.add("banana");
-      checkExpected.add("bandana");
-      checkExpected.add("bandaid");
 
 
-
-      assertEquals(checkExpected, ListExamples.filter(inputList, sc));
-
-  }
-
+  //Tests of static List<String> filter(List<String> s, StringChecker sc)
   @Test
-  public void testMerge(){
-      List<String>firstArray = new ArrayList<>();
-      firstArray.add("apple");
-      firstArray.add("banana");
-      firstArray.add("crab");
-      firstArray.add("error");
+  public void testFilterReturn(){
+    ArrayList<String> list1 = new ArrayList<String>();
+    list1.add("A");
+    list1.add("B");
+    list1.add("C");
+    list1.add("D");
+    list1.add("E");
+    list1.add("F");
 
-      List<String>secondArray = new ArrayList<>();
-      secondArray.add("atlanta");
-      secondArray.add("ball");
-      secondArray.add("crab");
-      secondArray.add("dream");
+    ArrayList<String> expected = new ArrayList<String>();
+    expected.add("A");
+    assertEquals(expected, filter(list1, AChecker));
+  }
+  //Tests of static List<String> merge(List<String> list1, List<String> list2)
+  @Test
+  public void testMergeReturn(){
+    ArrayList<String> list1 = new ArrayList<String>();
+    ArrayList<String> list2 = new ArrayList<String>();
+    list1.add("B");
+    list1.add("F");
+    list1.add("H");
 
-      List<String>finalArray = new ArrayList<>();
-      finalArray.add("apple");
-      finalArray.add("atlanta");
-      finalArray.add("ball");
-      finalArray.add("banana");
-      finalArray.add("crab");
-      finalArray.add("crab");
-      finalArray.add("dream");
-      finalArray.add("error");
+    list2.add("C");
+    list2.add("D");
+    list2.add("K");
 
-      assertEquals(finalArray, ListExamples.merge(firstArray, secondArray));
+    ArrayList<String> expected = new ArrayList<String>();
+    expected.add("B"); expected.add("C"); expected.add("D"); expected.add("D"); expected.add("F"); expected.add("H");expected.add("K");
+    assertEquals(expected, merge(list1, list2));
   }
 }
